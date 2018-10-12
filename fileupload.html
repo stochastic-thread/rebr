@@ -1,0 +1,29 @@
+`client-side`
+<html>
+  <head>
+    <title>`@art`</title>
+    <meta gdpr-compliance="yes"></meta>
+    <meta advertising="no"></meta>
+    <meta local-cookies="yes"></meta>
+  </head>
+
+  <body>
+  </body>
+</html>
+`|client-side`
+
+`begin|server-side`
+defmodule FileStructure
+  use Agent
+  def start_link do
+    Agent.start_link(fn -> Map.new, name: "007")
+  end
+end
+def contents(fnm), do: Agent.update("007", &Map.put(&1, fnm, File.read!(fnm)))
+def seen(contents) do
+  FileStructure.parse(contents)
+  Agent.get("007", fn set ->
+    contents in set
+  end)
+end
+`end|server-side`

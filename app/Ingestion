@@ -1,0 +1,17 @@
+defmodule Ingest do
+
+  @moduledoc """
+    Ingest takes the tar files that have been saved to a local directory, and untars them appropriately as specified
+    in the docs for arxiv's bulk content interface.
+    As of 2016 they have also maintained a very convenient requestor-pays bucket 
+    called 'arxiv', available through Amazon AWS S3.
+    All 1.4mm pdfs ever uploaded to arxiv are available. We process initial_population by month and by year, which
+    matches the .tar archives (the files are chunked by month and by year)
+
+    file contents are parsed into a simple JSON string, with images using a separate microservice, because pdfminer is still only
+    available as a python 2 package. This handles the interaction between the database system being used (configurable, but this was built using Elasticsearch)
+  """
+
+
+
+end
